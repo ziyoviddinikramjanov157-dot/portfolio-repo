@@ -4,174 +4,486 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ziyoviddin | Portfolio</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<meta name="description" content="Ziyoviddin — startap asoschisi va full-stack dasturchi. AI, energetika va veb mahsulotlar.">
+<meta name="theme-color" content="#07070a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-:root{--bg:#060606;--tx:#f4f4f0;--mu:#8a8a85;--l:#c6ff00;--p:#ff2e93;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box;margin:0}
+:root{
+ --bg:#07070a;--s1:#0e0e13;--s2:#14141b;--ln:#ffffff14;--ln2:#ffffff24;
+ --tx:#f3f3f6;--mu:#8b8b98;--dim:#5a5a66;
+ --a:#d4ff3a;--b:#7c5cff;--c:#22d3ee;
+ --grad:linear-gradient(110deg,var(--a) 0%,var(--c) 50%,var(--b) 100%);
+ --r:22px;color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg)}
-body{background:var(--bg);color:var(--tx);font-family:"Space Grotesk",system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.07;background:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 3px)}
+body{background:var(--bg);color:var(--tx);font-family:"Manrope",system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+::selection{background:var(--a);color:#000}
+a{color:inherit;text-decoration:none}
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-main,nav,footer,.mq{position:relative;z-index:1}
-svg.i{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-nav{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;background:#060606cc;backdrop-filter:blur(10px);border-bottom:1px solid #ffffff1a;z-index:5;font:700 13px "JetBrains Mono",monospace;text-transform:uppercase}
-nav b{color:var(--l)}
-nav div{display:flex;gap:22px;align-items:center}
-nav a{color:var(--tx);text-decoration:none;transition:.2s}
-nav a:hover{color:var(--l)}
-nav a.cta{background:var(--l);color:#000;padding:9px 16px}
-nav a.cta:hover{background:var(--p);color:#fff}
-section{padding:100px 5vw;max-width:1200px;margin:auto;perspective:1400px}
-.tag{display:inline-block;font:700 12px "JetBrains Mono",monospace;background:var(--l);color:#000;padding:5px 10px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.1em}
-h2{font-size:clamp(38px,7vw,86px);line-height:.95;letter-spacing:-.045em;font-weight:700;text-transform:uppercase;margin-bottom:56px}
-h2 em{font-style:normal;color:var(--l)}
-.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center}
-.hero .hi{font:700 14px "JetBrains Mono",monospace;color:var(--l);margin-bottom:20px;text-transform:uppercase}
-.hero .hi::before{content:"> "}
-.name{font-size:clamp(54px,14.5vw,190px);line-height:.88;letter-spacing:-.06em;font-weight:700;text-transform:uppercase;position:relative;display:inline-block;transform-style:preserve-3d;transition:transform .12s ease-out}
-.name::before,.name::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%}
-.name::before{color:var(--p);animation:gl1 3.2s infinite steps(1);mix-blend-mode:screen}
-.name::after{color:#00e5ff;animation:gl2 3.2s infinite steps(1);mix-blend-mode:screen}
-@keyframes gl1{0%,90%,100%{transform:none;clip-path:inset(0 0 100% 0)}91%{transform:translate(-8px,2px);clip-path:inset(15% 0 55% 0)}94%{transform:translate(6px,-2px);clip-path:inset(60% 0 10% 0)}97%{transform:translate(-4px,0);clip-path:inset(35% 0 40% 0)}}
-@keyframes gl2{0%,90%,100%{transform:none;clip-path:inset(0 0 100% 0)}92%{transform:translate(8px,-2px);clip-path:inset(50% 0 20% 0)}95%{transform:translate(-6px,2px);clip-path:inset(10% 0 70% 0)}98%{transform:translate(4px,0);clip-path:inset(70% 0 5% 0)}}
-.hero p{max-width:520px;color:var(--mu);font-size:19px;line-height:1.6;margin:30px 0 36px}
-.hero p b{color:var(--tx)}
-.btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;font:700 14px "JetBrains Mono",monospace;text-transform:uppercase;text-decoration:none;padding:18px 28px;background:var(--l);color:#000;border:2px solid var(--l);cursor:pointer;box-shadow:6px 6px 0 var(--p);transition:transform .15s,box-shadow .15s}
-.btn:hover{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--p)}
-.btn.o{background:transparent;color:var(--tx);border-color:var(--tx);box-shadow:6px 6px 0 #ffffff22}
-.mq{overflow:hidden;background:var(--l);color:#000;transform:rotate(-2deg);margin:30px -3vw;padding:14px 0;border-block:3px solid #000;font:700 26px "Space Grotesk",sans-serif;text-transform:uppercase;white-space:nowrap}
-.mq div{display:inline-block;animation:mq 22s linear infinite}
+.noise{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.glow{position:fixed;width:620px;height:620px;border-radius:50%;filter:blur(120px);opacity:.18;z-index:0;pointer-events:none}
+.glow.g1{background:var(--b);top:-200px;left:-180px}
+.glow.g2{background:var(--c);bottom:-260px;right:-200px;opacity:.12}
+main,nav,footer,.mq{position:relative;z-index:2}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mono{font-family:"JetBrains Mono",monospace}
+.gt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* cursor */
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;border:1px solid #ffffff55;border-radius:50%;pointer-events:none;z-index:60;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s,border-color .25s;mix-blend-mode:difference}
+.cur.big{width:70px;height:70px;background:#fff;border-color:#fff}
+@media(hover:none){.cur{display:none}}
+
+/* nav */
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:6px;padding:7px 7px 7px 20px;background:#0e0e13b3;backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid var(--ln2);border-radius:99px;width:max-content;max-width:calc(100% - 32px)}
+.logo{font:800 15px "Unbounded",sans-serif;letter-spacing:-.02em;margin-right:18px;display:flex;align-items:center;gap:8px}
+.logo i{width:9px;height:9px;border-radius:50%;background:var(--a);box-shadow:0 0 12px var(--a)}
+nav .lk{display:flex;gap:2px}
+nav .lk a{font-size:14px;font-weight:600;color:var(--mu);padding:9px 14px;border-radius:99px;transition:.2s}
+nav .lk a:hover,nav .lk a.act{color:var(--tx);background:#ffffff0d}
+nav .cta{font-size:14px;font-weight:700;background:var(--a);color:#000;padding:10px 18px;border-radius:99px;transition:.2s}
+nav .cta:hover{box-shadow:0 0 0 4px #d4ff3a33}
+
+/* layout */
+section{padding:120px 24px;max-width:1240px;margin:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 12px "JetBrains Mono",monospace;color:var(--mu);text-transform:uppercase;letter-spacing:.14em;margin-bottom:22px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--a)}
+h2{font:800 clamp(34px,5.6vw,72px)/1 "Unbounded",sans-serif;letter-spacing:-.04em;margin-bottom:60px;max-width:900px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:60px}
+.head h2{margin:0}
+.head p{color:var(--mu);max-width:340px;font-size:16px}
+
+/* hero */
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:140px;padding-bottom:80px;position:relative}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 12px;border:1px solid var(--ln2);border-radius:99px;font-size:13px;font-weight:600;color:var(--mu);background:#ffffff06;width:max-content;margin-bottom:34px}
+.badge i{width:8px;height:8px;border-radius:50%;background:#3dff8a;box-shadow:0 0 0 0 #3dff8a88;animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px #3dff8a00}100%{box-shadow:0 0 0 0 #3dff8a00}}
+.name{font:800 clamp(52px,12.5vw,176px)/.9 "Unbounded",sans-serif;letter-spacing:-.065em;margin-left:-.04em}
+.name .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.name .ln span{display:inline-block;transform:translateY(105%);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.name .ln:nth-child(2) span{animation-delay:.12s}
+@keyframes up{to{transform:none}}
+.role{margin:34px 0 0;font-size:clamp(18px,2vw,22px);color:var(--mu);max-width:640px}
+.role b{color:var(--tx);font-weight:600}
+.rot{display:inline-grid;height:1.5em;line-height:1.5;overflow:hidden;vertical-align:bottom;color:var(--a);font-weight:700;white-space:nowrap}
+.rot span{grid-area:1/1;animation:rot 9s infinite;opacity:0;transform:translateY(100%)}
+.rot span:nth-child(2){animation-delay:3s}.rot span:nth-child(3){animation-delay:6s}
+@keyframes rot{0%{opacity:0;transform:translateY(100%)}5%,28%{opacity:1;transform:none}33%,100%{opacity:0;transform:translateY(-100%)}}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:44px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:17px 26px;border-radius:99px;background:var(--a);color:#000;border:1px solid var(--a);cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px -10px #d4ff3a88}
+.btn svg{width:18px;height:18px;transition:transform .2s}
+.btn:hover svg{transform:translateX(3px) rotate(-45deg)}
+.btn.o{background:transparent;color:var(--tx);border-color:var(--ln2)}
+.btn.o:hover{background:#ffffff0a;box-shadow:none}
+.stats{display:grid;grid-template-columns:repeat(3,auto);gap:48px;margin-top:80px;width:max-content;max-width:100%}
+.stats div b{display:block;font:800 clamp(28px,3.4vw,44px)/1 "Unbounded",sans-serif;letter-spacing:-.04em}
+.stats div span{font-size:13px;color:var(--mu)}
+.scroll{position:absolute;bottom:34px;right:24px;font:600 11px "JetBrains Mono",monospace;color:var(--dim);letter-spacing:.2em;writing-mode:vertical-rl;display:flex;align-items:center;gap:14px}
+.scroll::after{content:"";width:1px;height:60px;background:linear-gradient(var(--a),transparent);animation:sc 2s infinite}
+@keyframes sc{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* marquee */
+.mq{overflow:hidden;border-block:1px solid var(--ln);padding:26px 0;white-space:nowrap;background:#07070acc;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mq div{display:inline-flex;gap:48px;animation:mq 34s linear infinite;font:800 clamp(28px,4vw,52px) "Unbounded",sans-serif;letter-spacing:-.04em;padding-right:48px}
+.mq span:nth-child(even){color:transparent;-webkit-text-stroke:1px #ffffff55}
+.mq em{font-style:normal;color:var(--a)}
 @keyframes mq{to{transform:translateX(-50%)}}
-.about{font-size:clamp(22px,3.2vw,40px);line-height:1.25;letter-spacing:-.025em;font-weight:500;max-width:980px}
-.about span{color:var(--mu)}.about b{color:var(--l);font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border:1px solid #ffffff2a}
-.card{position:relative;padding:30px;background:#0a0a0a;border:1px solid #ffffff2a;margin:-1px 0 0 -1px;transform-style:preserve-3d;transition:transform .15s ease-out,background .2s,box-shadow .2s;overflow:hidden}
-.card:hover{background:#101010;box-shadow:inset 0 0 0 2px var(--l);z-index:2}
-.card .n{font:700 12px "JetBrains Mono",monospace;color:var(--mu);position:absolute;top:16px;right:18px}
-.ic{color:var(--l);margin-bottom:34px;transform:translateZ(40px);display:block}
-.card h3{font-size:24px;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:10px;transform:translateZ(26px)}
-.card p{color:var(--mu);line-height:1.6;font-size:15.5px;transform:translateZ(12px)}
-.proj{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.pc{position:relative;border:2px solid var(--tx);background:#0a0a0a;padding:0;transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .2s}
-.pc:hover{box-shadow:12px 12px 0 var(--l)}
-.pc .shot{height:230px;position:relative;overflow:hidden;border-bottom:2px solid var(--tx);display:grid;place-items:center;font:700 70px "Space Grotesk";letter-spacing:-.06em;color:#000}
-.pc .shot.a{background:var(--l)}.pc .shot.b{background:var(--p);color:#fff}
-.pc .shot::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,#0000001a 0 2px,transparent 2px 14px)}
-.pc .shot span{position:relative;transform:translateZ(60px)}
-.pc .bd{padding:26px}
-.pc h3{font-size:30px;text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
-.pc p{color:var(--mu);line-height:1.6}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.tags span{font:700 11px "JetBrains Mono",monospace;text-transform:uppercase;border:1px solid var(--l);color:var(--l);padding:5px 9px}
-.quote{border:2px solid var(--l);padding:44px;max-width:820px;background:#0a0a0a;box-shadow:12px 12px 0 var(--p)}
-.quote p{font-size:clamp(20px,2.6vw,30px);line-height:1.35;letter-spacing:-.02em;font-weight:500}
-.quote .st{color:var(--l);letter-spacing:6px;margin-bottom:18px}
-.quote small{display:block;margin-top:22px;font:700 13px "JetBrains Mono",monospace;color:var(--mu);text-transform:uppercase}
-form{display:grid;gap:0;max-width:640px;border:2px solid var(--tx)}
-input,textarea{width:100%;padding:20px;border:0;border-bottom:2px solid var(--tx);background:#0a0a0a;color:var(--tx);font:500 16px "Space Grotesk",sans-serif;outline:0;resize:none}
-input:focus,textarea:focus{background:#141414;box-shadow:inset 4px 0 0 var(--l)}
-form .btn{box-shadow:none;border:0;padding:22px;font-size:15px}
-form .btn:hover{background:var(--p);color:#fff;transform:none}
-.rev{opacity:0;transform:translateY(70px) rotateX(25deg);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+
+/* about bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.box{position:relative;background:var(--s1);border:1px solid var(--ln);border-radius:var(--r);padding:32px;overflow:hidden;isolation:isolate}
+.box::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),#ffffff10,transparent 40%)}
+.box:hover::before{opacity:1}
+.box::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),#d4ff3a99,transparent 50%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.box:hover::after{opacity:1}
+.ab-main{grid-column:span 4;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.ab-main p{font:600 clamp(22px,2.6vw,34px)/1.3 "Manrope",sans-serif;letter-spacing:-.02em}
+.ab-main p span{color:var(--mu)}
+.ab-main p b{font-weight:600}
+.ab-sig{display:flex;align-items:center;gap:14px}
+.ava{width:54px;height:54px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font:800 20px "Unbounded";color:#000}
+.ab-sig small{display:block;color:var(--mu);font-size:13px}
+.ab-st{grid-column:span 2;display:flex;flex-direction:column;justify-content:space-between;min-height:180px}
+.ab-st b{font:800 54px/1 "Unbounded";letter-spacing:-.05em}
+.ab-st span{color:var(--mu);font-size:14px}
+.lbl{font:600 11px "JetBrains Mono",monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.14em}
+.ab-loc{grid-column:span 3;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.ab-loc h4,.ab-val h4{font:600 22px "Unbounded";letter-spacing:-.03em;margin-top:8px}
+.clock{font:600 30px "JetBrains Mono",monospace;color:var(--a)}
+.ab-val{grid-column:span 3}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{font-size:13px;font-weight:600;padding:7px 13px;border-radius:99px;background:#ffffff0a;border:1px solid var(--ln)}
+
+/* skills */
+.sk{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sk .box{display:flex;flex-direction:column;gap:18px;min-height:220px}
+.ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#ffffff08;border:1px solid var(--ln2);color:var(--a)}
+.sk h3,.sv h3{font:600 20px "Unbounded";letter-spacing:-.03em}
+.sk p,.sv p{color:var(--mu);font-size:15px}
+.bar{margin-top:auto;height:4px;border-radius:9px;background:#ffffff0d;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--grad);border-radius:inherit;transition:width 1.4s cubic-bezier(.2,.8,.2,1) .3s}
+.on .bar i{width:var(--w)}
+.sk .top{display:flex;justify-content:space-between;align-items:flex-start}
+.sk .top .mono{font-size:12px;color:var(--dim)}
+
+/* services */
+.sv{display:grid;grid-template-columns:1fr;border-top:1px solid var(--ln)}
+.sv-i{display:grid;grid-template-columns:90px 1fr 1.2fr 50px;gap:24px;align-items:center;padding:34px 8px;border-bottom:1px solid var(--ln);transition:padding .3s,background .3s;position:relative}
+.sv-i:hover{padding-left:24px;background:linear-gradient(90deg,#d4ff3a0d,transparent 60%)}
+.sv-i .mono{color:var(--dim);font-size:14px}
+.sv-i h3{font-size:clamp(20px,2.4vw,30px)}
+.sv-i .ar{width:46px;height:46px;border-radius:50%;border:1px solid var(--ln2);display:grid;place-items:center;transition:.3s}
+.sv-i:hover .ar{background:var(--a);color:#000;border-color:var(--a);transform:rotate(-45deg)}
+
+/* projects */
+.pj{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pc{background:var(--s1);border:1px solid var(--ln);border-radius:28px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s;transform-style:preserve-3d}
+.pc:hover{border-color:var(--ln2)}
+.shot{height:340px;position:relative;overflow:hidden;display:grid;place-items:center;padding:34px}
+.shot.a{background:radial-gradient(circle at 30% 20%,#d4ff3a,#7ea600 70%)}
+.shot.b{background:radial-gradient(circle at 70% 20%,#22d3ee,#5b3df5 75%)}
+.shot::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#0000000f 1px,transparent 1px),linear-gradient(90deg,#0000000f 1px,transparent 1px);background-size:28px 28px}
+.ui{position:relative;width:100%;max-width:420px;background:#0b0b10;border-radius:16px;box-shadow:0 40px 80px -20px #00000099;padding:14px;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform:translateY(30px) rotateX(8deg)}
+.pc:hover .ui{transform:translateY(10px) rotateX(0)}
+.ui .dots{display:flex;gap:6px;margin-bottom:12px}
+.ui .dots i{width:9px;height:9px;border-radius:50%;background:#ffffff22}
+.ui .dots i:first-child{background:#ff5f57}.ui .dots i:nth-child(2){background:#febc2e}.ui .dots i:nth-child(3){background:#28c840}
+.ui-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ui-g div{aspect-ratio:1;border-radius:9px;background:linear-gradient(135deg,#ffffff14,#ffffff05)}
+.ui-g div:nth-child(1){background:linear-gradient(135deg,#d4ff3a,#3a9a00)}
+.ui-g div:nth-child(5){background:linear-gradient(135deg,#ff7ac6,#7c5cff)}
+.ui-g div:nth-child(3){background:linear-gradient(135deg,#22d3ee,#1b3cff)}
+.ui-in{margin-top:10px;height:30px;border-radius:8px;background:#ffffff0d;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font:500 10px "JetBrains Mono";color:var(--mu)}
+.ui-in i{width:40px;height:16px;border-radius:5px;background:var(--a)}
+.ui-k{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ui-k div{background:#ffffff0a;border-radius:9px;padding:10px;font:500 9px "JetBrains Mono";color:var(--mu)}
+.ui-k b{display:block;font:700 18px "Unbounded";color:var(--tx);margin-top:4px}
+.ui-k b em{font-style:normal;font-size:10px;color:#3dff8a;margin-left:4px}
+.ui svg.ch{width:100%;height:90px;display:block}
+.bd{padding:30px 32px 34px}
+.bd-t{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px}
+.bd h3{font:800 28px "Unbounded";letter-spacing:-.04em}
+.st-b{font:600 11px "JetBrains Mono";text-transform:uppercase;padding:6px 10px;border-radius:99px;background:#d4ff3a14;color:var(--a);border:1px solid #d4ff3a33;white-space:nowrap}
+.bd p{color:var(--mu);font-size:15.5px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.tags span{font:500 12px "JetBrains Mono",monospace;padding:6px 11px;border-radius:99px;border:1px solid var(--ln2);color:#c8c8d0}
+
+/* process */
+.pr{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.pr .box{padding:28px}
+.pr .box b{font:800 44px "Unbounded";letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px #ffffff40;display:block;margin-bottom:40px;transition:.3s}
+.pr .box:hover b{-webkit-text-stroke-color:var(--a);color:#d4ff3a14}
+.pr h4{font:600 18px "Unbounded";margin-bottom:8px;letter-spacing:-.02em}
+.pr p{font-size:14.5px;color:var(--mu)}
+
+/* quote */
+.qt{position:relative;padding:clamp(34px,6vw,72px);border-radius:32px;background:linear-gradient(var(--s1),var(--s1)) padding-box,var(--grad) border-box;border:1px solid transparent;overflow:hidden}
+.qt .qm{position:absolute;top:-40px;right:30px;font:800 260px/1 "Unbounded";color:#ffffff06}
+.qt .st{color:var(--a);letter-spacing:4px;margin-bottom:22px}
+.qt p{font:600 clamp(22px,3vw,40px)/1.3 "Manrope";letter-spacing:-.025em;max-width:900px;position:relative}
+.qt .who{display:flex;align-items:center;gap:14px;margin-top:36px}
+.qt .who i{width:46px;height:46px;border-radius:50%;background:var(--s2);border:1px solid var(--ln2);display:grid;place-items:center;font-style:normal;font-weight:700}
+.qt small{display:block;color:var(--mu)}
+
+/* contact */
+.ct{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:stretch}
+.ct-l{display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+.ct-l h2{margin-bottom:22px}
+.ct-l>div>p{color:var(--mu);font-size:17px;max-width:420px}
+.soc{display:grid;gap:10px}
+.soc a{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border:1px solid var(--ln);border-radius:16px;background:var(--s1);font-weight:600;transition:.25s}
+.soc a span{display:flex;align-items:center;gap:12px}
+.soc a small{color:var(--mu);font:500 13px "JetBrains Mono"}
+.soc a:hover{border-color:var(--a);transform:translateX(6px)}
+form{display:grid;gap:14px;padding:32px;border-radius:28px;background:var(--s1);border:1px solid var(--ln)}
+.fl{position:relative}
+.fl input,.fl textarea{width:100%;padding:24px 18px 10px;border:1px solid var(--ln2);border-radius:14px;background:var(--bg);color:var(--tx);font:500 16px "Manrope",sans-serif;outline:0;resize:none;transition:border-color .2s,box-shadow .2s}
+.fl label{position:absolute;left:19px;top:17px;color:var(--mu);font-size:15px;pointer-events:none;transition:.2s}
+.fl input:focus,.fl textarea:focus{border-color:var(--a);box-shadow:0 0 0 4px #d4ff3a1a}
+.fl input:focus+label,.fl input:not(:placeholder-shown)+label,.fl textarea:focus+label,.fl textarea:not(:placeholder-shown)+label{top:7px;font-size:11.5px;color:var(--a)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{display:none}
+.opts label{font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:99px;border:1px solid var(--ln2);cursor:pointer;color:var(--mu);transition:.2s}
+.opts input:checked+label{background:var(--a);color:#000;border-color:var(--a)}
+form .btn{justify-content:center;width:100%;margin-top:6px}
+
+/* footer */
+footer{max-width:1240px;margin:auto;padding:60px 24px 40px}
+.big{font:800 clamp(34px,11.5vw,150px)/.9 "Unbounded";white-space:nowrap;overflow:hidden;letter-spacing:-.07em;text-align:center;background:linear-gradient(#ffffff26,#ffffff00);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+.fb{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:30px;border-top:1px solid var(--ln);margin-top:30px;font:500 13px "JetBrains Mono";color:var(--mu)}
+.fb a:hover{color:var(--a)}
+
+/* reveal */
+.rev{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
 .rev.on{opacity:1;transform:none}
-.card.rev.on,.pc.rev.on{transition:transform .15s ease-out,background .2s,box-shadow .2s}
-footer{padding:40px 5vw;border-top:1px solid #ffffff1a;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font:400 12px "JetBrains Mono",monospace;color:var(--mu);text-transform:uppercase}
-@media(max-width:820px){.proj{grid-template-columns:1fr}nav a:not(.cta){display:none}}
+
+@media(max-width:1000px){
+ .sk{grid-template-columns:1fr 1fr}
+ .pr{grid-template-columns:1fr 1fr}
+ .ab-main{grid-column:span 6;grid-row:auto}
+ .ab-st{grid-column:span 3}
+ .sv-i{grid-template-columns:60px 1fr 50px}.sv-i p{grid-column:2}.sv-i .ar{grid-row:1;grid-column:3}
+}
+@media(max-width:820px){
+ nav .lk{display:none}
+ nav{left:16px;right:16px;transform:none;width:auto;justify-content:space-between}
+ .pj,.ct{grid-template-columns:1fr}
+ .ab-loc,.ab-val{grid-column:span 6}
+ .shot{height:280px;padding:24px}
+ section{padding:90px 16px}
+ .scroll{display:none}
+ .stats{gap:28px}
+}
+@media(max-width:560px){
+ .sk,.pr{grid-template-columns:1fr}
+ .ab-st{grid-column:span 6;min-height:140px}
+ .sv-i{grid-template-columns:44px 1fr;padding:26px 4px}.sv-i .ar{display:none}
+ .box,form{padding:24px}
+ .bd{padding:24px}
+ .stats{grid-template-columns:repeat(3,1fr);width:100%;gap:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ .rev{opacity:1;transform:none}.name .ln span{transform:none}
+ .rot span{opacity:0}.rot span:first-child{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute"><defs>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
 <symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
 <symbol id="layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5"/></symbol>
-<symbol id="server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="1"/><rect x="3" y="13" width="18" height="7" rx="1"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
+<symbol id="server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></symbol>
 <symbol id="db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
-<symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
-<symbol id="mon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></symbol>
-<symbol id="ph" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="1"/><path d="M11 18h2"/></symbol>
-<symbol id="plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 01-12 0zM12 18v4"/></symbol>
-<symbol id="rk" viewBox="0 0 24 24"><path d="M5 15c-1 1-2 4-2 6 2 0 5-1 6-2M14 4c3-2 6-2 7-1 1 1 1 4-1 7l-7 7-5-5zM9 14l-3-1 2-4 4-1"/></symbol>
-<symbol id="ai" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4M9 12h6"/></symbol>
+<symbol id="ai" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4M9.5 15l2.5-6 2.5 6M10.3 13h3.4"/></symbol>
+<symbol id="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="tg" viewBox="0 0 24 24"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z M9 13l8-6"/></symbol>
+<symbol id="gh" viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2-6-2.5M15 22v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 00-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V22"/></symbol>
+<symbol id="in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
 </defs></svg>
+
+<div class="noise"></div><div class="glow g1"></div><div class="glow g2"></div>
 <canvas id="bg"></canvas>
-<nav><b>ZIYOVIDDIN_</b><div><a href="#about">Haqimda</a><a href="#skills">Stack</a><a href="#projects">Loyihalar</a><a class="cta" href="#contact">Bog‘lanish</a></div></nav>
-<main>
+<div class="cur" id="cur"></div>
+
+<nav>
+ <a class="logo" href="#top"><i></i>ziyoviddin</a>
+ <div class="lk"><a href="#about">Haqimda</a><a href="#skills">Stack</a><a href="#projects">Loyihalar</a><a href="#process">Jarayon</a></div>
+ <a class="cta" href="#contact">Bog‘lanish</a>
+</nav>
+
+<main id="top">
 <section class="hero">
- <div class="hi rev">Salom, men</div>
- <div class="rev"><h1 class="name" id="nm" data-t="Ziyoviddin">Ziyoviddin</h1></div>
- <p class="rev"><b>Startap asoschisi va dasturchi.</b> G‘oyani ishlaydigan mahsulotga aylantiraman: AI, energetika va veb.</p>
- <div class="btns rev"><a class="btn" href="#projects">Loyihalarim</a><a class="btn o" href="#contact">Gaplashamiz</a></div>
+ <div class="badge rev"><i></i>Yangi loyihalar uchun ochiqman</div>
+ <h1 class="name"><span class="ln"><span>Ziyo</span></span><span class="ln"><span class="gt">viddin.</span></span></h1>
+ <p class="role rev"><b>Startap asoschisi & dasturchi.</b> G‘oyani ishlaydigan mahsulotga aylantiraman —
+  <span class="rot"><span>AI mahsulotlar</span><span>energetika</span><span>zamonaviy veb</span></span></p>
+ <div class="btns rev">
+  <a class="btn" href="#projects" data-h>Loyihalarim <svg class="i"><use href="#arr"/></svg></a>
+  <a class="btn o" href="#contact" data-h>Gaplashamiz</a>
+ </div>
+ <div class="stats rev">
+  <div><b data-c="2">0</b><span>Startap</span></div>
+  <div><b data-c="6" data-s="+">0</b><span>Texnologiya</span></div>
+  <div><b data-c="100" data-s="%">0</b><span>Mustaqillik</span></div>
+ </div>
+ <div class="scroll">SCROLL</div>
 </section>
-<div class="mq"><div>CORZ AI ✦ ECOWATT UZBEKISTAN ✦ AI ✦ 3D ✦ STARTAP ✦ FULL STACK ✦ CORZ AI ✦ ECOWATT UZBEKISTAN ✦ AI ✦ 3D ✦ STARTAP ✦ FULL STACK ✦&nbsp;</div></div>
 
-<section id="about"><span class="tag">01 / haqimda</span>
- <p class="about rev">Men o‘zimning startaplarimni quraman. <b>Erkinlik va mustaqillik</b> menga pul emas, yo‘nalish beradi. <span>Kod yozaman, mahsulot o‘ylayman va uni bozorga olib chiqaman.</span></p></section>
+<div class="mq" aria-hidden="true"><div>
+ <span>CORZ AI</span><em>✦</em><span>ECOWATT</span><em>✦</em><span>FULL STACK</span><em>✦</em><span>STARTAP</span><em>✦</em><span>3D & AI</span><em>✦</em>
+ <span>CORZ AI</span><em>✦</em><span>ECOWATT</span><em>✦</em><span>FULL STACK</span><em>✦</em><span>STARTAP</span><em>✦</em><span>3D & AI</span><em>✦</em>
+</div></div>
 
-<section id="skills"><span class="tag">02 / stack</span><h2>Nimada <em>kuchliman</em></h2>
- <div class="grid">
-  <div class="card rev" data-tilt><span class="n">01</span><span class="ic"><svg class="i"><use href="#code"/></svg></span><h3>React / Next.js</h3><p>Tez va zamonaviy interfeyslar.</p></div>
-  <div class="card rev" data-tilt><span class="n">02</span><span class="ic"><svg class="i"><use href="#bolt"/></svg></span><h3>JavaScript</h3><p>ES6+ va asinxron dasturlash.</p></div>
-  <div class="card rev" data-tilt><span class="n">03</span><span class="ic"><svg class="i"><use href="#server"/></svg></span><h3>Node.js</h3><p>Server va REST API.</p></div>
-  <div class="card rev" data-tilt><span class="n">04</span><span class="ic"><svg class="i"><use href="#db"/></svg></span><h3>PostgreSQL / Prisma</h3><p>Ishonchli ma’lumotlar bazasi.</p></div>
-  <div class="card rev" data-tilt><span class="n">05</span><span class="ic"><svg class="i"><use href="#layers"/></svg></span><h3>Tailwind CSS</h3><p>Tez va moslashuvchan dizayn.</p></div>
-  <div class="card rev" data-tilt><span class="n">06</span><span class="ic"><svg class="i"><use href="#ai"/></svg></span><h3>AI integratsiya</h3><p>AI ni mahsulot ichiga qo‘shish.</p></div>
- </div></section>
+<section id="about">
+ <div class="eyebrow">01 — Haqimda</div>
+ <div class="bento">
+  <div class="box ab-main rev">
+   <p>Men o‘zimning startaplarimni quraman. <b class="gt">Erkinlik va mustaqillik</b> menga pul emas, yo‘nalish beradi. <span>Kod yozaman, mahsulot o‘ylayman va uni bozorga olib chiqaman.</span></p>
+   <div class="ab-sig"><div class="ava">Z</div><div><b>Ziyoviddin</b><small>Founder · Full-stack developer</small></div></div>
+  </div>
+  <div class="box ab-st rev"><span class="lbl">Startaplar</span><div><b class="gt">02</b><span>CORZ AI va EcoWatt</span></div></div>
+  <div class="box ab-st rev"><span class="lbl">Yo‘nalish</span><div><b>AI</b><span>+ energetika + veb</span></div></div>
+  <div class="box ab-loc rev"><div><span class="lbl">Joylashuv</span><h4>O‘zbekiston 🇺🇿</h4></div><div class="clock" id="clock">--:--</div></div>
+  <div class="box ab-val rev"><span class="lbl">Qadriyatlar</span><div class="chips"><span>Tezlik</span><span>Sifat</span><span>Mustaqillik</span><span>Natija</span><span>O‘sish</span></div></div>
+ </div>
+</section>
 
-<section><span class="tag">03 / xizmatlar</span><h2>Nima <em>qilaman</em></h2>
- <div class="grid">
-  <div class="card rev" data-tilt><span class="n">01</span><span class="ic"><svg class="i"><use href="#mon"/></svg></span><h3>Veb-sayt</h3><p>Biznes va shaxsiy saytlar noldan.</p></div>
-  <div class="card rev" data-tilt><span class="n">02</span><span class="ic"><svg class="i"><use href="#ph"/></svg></span><h3>Responsiv dizayn</h3><p>Har qanday ekranga mos.</p></div>
-  <div class="card rev" data-tilt><span class="n">03</span><span class="ic"><svg class="i"><use href="#plug"/></svg></span><h3>API integratsiya</h3><p>To‘lov va tashqi xizmatlarni ulash.</p></div>
-  <div class="card rev" data-tilt><span class="n">04</span><span class="ic"><svg class="i"><use href="#rk"/></svg></span><h3>MVP yaratish</h3><p>G‘oyadan ishlaydigan mahsulotgacha.</p></div>
- </div></section>
+<section id="skills">
+ <div class="head"><div><div class="eyebrow">02 — Stack</div><h2>Nimada <span class="gt">kuchliman</span></h2></div><p>Mahsulotni boshidan oxirigacha — interfeys, server, baza va AI — o‘zim quraman.</p></div>
+ <div class="sk">
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#code"/></svg></span><span class="mono">01</span></div><h3>React / Next.js</h3><p>Tez va zamonaviy interfeyslar.</p><div class="bar"><i style="--w:92%"></i></div></div>
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#bolt"/></svg></span><span class="mono">02</span></div><h3>JavaScript</h3><p>ES6+ va asinxron dasturlash.</p><div class="bar"><i style="--w:95%"></i></div></div>
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#server"/></svg></span><span class="mono">03</span></div><h3>Node.js</h3><p>Server va REST API.</p><div class="bar"><i style="--w:85%"></i></div></div>
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#db"/></svg></span><span class="mono">04</span></div><h3>PostgreSQL / Prisma</h3><p>Ishonchli ma’lumotlar bazasi.</p><div class="bar"><i style="--w:80%"></i></div></div>
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#layers"/></svg></span><span class="mono">05</span></div><h3>Tailwind CSS</h3><p>Tez va moslashuvchan dizayn.</p><div class="bar"><i style="--w:90%"></i></div></div>
+  <div class="box rev"><div class="top"><span class="ic"><svg class="i"><use href="#ai"/></svg></span><span class="mono">06</span></div><h3>AI integratsiya</h3><p>AI ni mahsulot ichiga qo‘shish.</p><div class="bar"><i style="--w:86%"></i></div></div>
+ </div>
+</section>
 
-<section id="projects"><span class="tag">04 / loyihalar</span><h2>Mening <em>startaplarim</em></h2>
- <div class="proj">
-  <div class="pc rev" data-tilt><div class="shot a"><span>CORZ AI</span></div><div class="bd"><h3>CORZ AI</h3><p>AI yordamida rasm, video va 3D yaratish platformasi. Landing, MVP dashboard va texnik yo‘l xaritasi tayyor.</p><div class="tags"><span>Next.js 14</span><span>Prisma</span><span>PostgreSQL</span><span>Auth.js</span></div></div></div>
-  <div class="pc rev" data-tilt><div class="shot b"><span>ECOWATT</span></div><div class="bd"><h3>EcoWatt Uzbekistan</h3><p>Energiya sarfini kuzatish tizimi. Pitch deck, tizim arxitekturasi va monitoring MVP yaratilgan.</p><div class="tags"><span>Energetika</span><span>Monitoring</span><span>MVP</span></div></div></div>
- </div></section>
+<section id="services">
+ <div class="eyebrow">03 — Xizmatlar</div>
+ <h2>Nima <span class="gt">qilaman</span></h2>
+ <div class="sv">
+  <a href="#contact" class="sv-i rev" data-h><span class="mono">/01</span><h3>Veb-sayt</h3><p>Biznes va shaxsiy saytlar noldan — dizayndan deploygacha.</p><span class="ar"><svg class="i"><use href="#arr"/></svg></span></a>
+  <a href="#contact" class="sv-i rev" data-h><span class="mono">/02</span><h3>Responsiv dizayn</h3><p>Telefon, planshet va kompyuterda birdek chiroyli.</p><span class="ar"><svg class="i"><use href="#arr"/></svg></span></a>
+  <a href="#contact" class="sv-i rev" data-h><span class="mono">/03</span><h3>API integratsiya</h3><p>To‘lov tizimlari va tashqi xizmatlarni ulash.</p><span class="ar"><svg class="i"><use href="#arr"/></svg></span></a>
+  <a href="#contact" class="sv-i rev" data-h><span class="mono">/04</span><h3>MVP yaratish</h3><p>G‘oyadan ishlaydigan mahsulotgacha — tez va aniq.</p><span class="ar"><svg class="i"><use href="#arr"/></svg></span></a>
+ </div>
+</section>
 
-<section><span class="tag">05 / fikrlar</span><h2>Ular <em>aytishdi</em></h2>
- <div class="quote rev" data-tilt><div class="st">★★★★★</div><p>Ajoyib ish! Loyiha o‘z vaqtida va yuqori sifatda topshirildi. Albatta yana murojaat qilaman.</p><small>— Mijoz ismi</small></div></section>
+<section id="projects">
+ <div class="head"><div><div class="eyebrow">04 — Loyihalar</div><h2>Mening <span class="gt">startaplarim</span></h2></div><p>Ikki yo‘nalish, bitta maqsad: real muammoni texnologiya bilan hal qilish.</p></div>
+ <div class="pj">
+  <article class="pc rev" data-tilt data-h>
+   <div class="shot a">
+    <div class="ui"><div class="dots"><i></i><i></i><i></i></div>
+     <div class="ui-g"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+     <div class="ui-in">› futuristik shahar, 3D, neon...<i></i></div>
+    </div>
+   </div>
+   <div class="bd">
+    <div class="bd-t"><h3>CORZ AI</h3><span class="st-b">MVP tayyor</span></div>
+    <p>AI yordamida rasm, video va 3D yaratish platformasi. Landing, MVP dashboard va texnik yo‘l xaritasi tayyor.</p>
+    <div class="tags"><span>Next.js 14</span><span>Prisma</span><span>PostgreSQL</span><span>Auth.js</span></div>
+   </div>
+  </article>
+  <article class="pc rev" data-tilt data-h>
+   <div class="shot b">
+    <div class="ui"><div class="dots"><i></i><i></i><i></i></div>
+     <div class="ui-k"><div>Bugungi sarf<b>142 kWt<em>-12%</em></b></div><div>Tejamkorlik<b>38%<em>↑</em></b></div></div>
+     <svg class="ch" viewBox="0 0 300 90" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".5"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient></defs><path d="M0 70 C30 60 50 30 80 38 S130 70 160 50 S220 10 250 24 S290 40 300 30 V90 H0Z" fill="url(#cg)"/><path d="M0 70 C30 60 50 30 80 38 S130 70 160 50 S220 10 250 24 S290 40 300 30" fill="none" stroke="#22d3ee" stroke-width="2"/></svg>
+    </div>
+   </div>
+   <div class="bd">
+    <div class="bd-t"><h3>EcoWatt</h3><span class="st-b">Monitoring MVP</span></div>
+    <p>O‘zbekiston uchun energiya sarfini kuzatish tizimi. Pitch deck, tizim arxitekturasi va monitoring MVP yaratilgan.</p>
+    <div class="tags"><span>Energetika</span><span>Monitoring</span><span>IoT</span><span>MVP</span></div>
+   </div>
+  </article>
+ </div>
+</section>
 
-<section id="contact"><span class="tag">06 / aloqa</span><h2>Keling <em>qilamiz</em></h2>
- <form class="rev" onsubmit="event.preventDefault();this.querySelector('button').textContent='YUBORILDI ✓'">
-  <input placeholder="Ismingiz" required><input type="email" placeholder="Email" required>
-  <textarea rows="4" placeholder="Xabaringiz" required></textarea>
-  <button class="btn">Xabar yuborish →</button></form></section>
+<section id="process">
+ <div class="eyebrow">05 — Jarayon</div>
+ <h2>G‘oyadan <span class="gt">natijagacha</span></h2>
+ <div class="pr">
+  <div class="box rev"><b>01</b><h4>Tahlil</h4><p>Muammo, auditoriya va maqsadni aniqlaymiz.</p></div>
+  <div class="box rev"><b>02</b><h4>Dizayn</h4><p>Struktura, prototip va vizual uslub.</p></div>
+  <div class="box rev"><b>03</b><h4>Ishlab chiqish</h4><p>Toza kod, tez interfeys, ishonchli backend.</p></div>
+  <div class="box rev"><b>04</b><h4>Ishga tushirish</h4><p>Deploy, test va o‘sish uchun qo‘llab-quvvatlash.</p></div>
+ </div>
+</section>
+
+<section>
+ <div class="eyebrow">06 — Fikrlar</div>
+ <div class="qt rev"><span class="qm">”</span>
+  <div class="st">★★★★★</div>
+  <p>Ajoyib ish! Loyiha o‘z vaqtida va yuqori sifatda topshirildi. Albatta yana murojaat qilaman.</p>
+  <div class="who"><i>M</i><div><b>Mijoz ismi</b><small>Kompaniya</small></div></div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="ct">
+  <div class="ct-l rev">
+   <div><div class="eyebrow">07 — Aloqa</div><h2>Keling, <span class="gt">birga quramiz</span></h2><p>G‘oyangiz bormi? Yozing — 24 soat ichida javob beraman.</p></div>
+   <div class="soc">
+    <a href="#" data-h><span><svg class="i"><use href="#tg"/></svg>Telegram</span><small>@username ↗</small></a>
+    <a href="https://github.com/ziyoviddinikramjanov157-dot" target="_blank" rel="noopener" data-h><span><svg class="i"><use href="#gh"/></svg>GitHub</span><small>ziyoviddin ↗</small></a>
+    <a href="#" data-h><span><svg class="i"><use href="#in"/></svg>LinkedIn</span><small>ziyoviddin ↗</small></a>
+   </div>
+  </div>
+  <form class="rev" id="form">
+   <span class="lbl">Qaysi xizmat kerak?</span>
+   <div class="opts">
+    <input type="radio" name="t" id="o1" checked><label for="o1">Veb-sayt</label>
+    <input type="radio" name="t" id="o2"><label for="o2">MVP</label>
+    <input type="radio" name="t" id="o3"><label for="o3">AI integratsiya</label>
+    <input type="radio" name="t" id="o4"><label for="o4">Boshqa</label>
+   </div>
+   <div class="fl"><input id="f1" placeholder=" " required><label for="f1">Ismingiz</label></div>
+   <div class="fl"><input id="f2" type="email" placeholder=" " required><label for="f2">Email</label></div>
+   <div class="fl"><textarea id="f3" rows="4" placeholder=" " required></textarea><label for="f3">Loyiha haqida qisqacha</label></div>
+   <button class="btn" data-h>Xabar yuborish <svg class="i"><use href="#arr"/></svg></button>
+  </form>
+ </div>
+</section>
 </main>
-<footer><span>© 2026 Ziyoviddin</span><span>Uzbekistan</span></footer>
+
+<footer>
+ <div class="big">ZIYOVIDDIN</div>
+ <div class="fb"><span>© 2026 Ziyoviddin. Barcha huquqlar himoyalangan.</span><a href="#top">Yuqoriga ↑</a></div>
+</footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* 3D background: particle wave + wireframe orb */
 try{
-const c=document.getElementById('bg'),r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true}),s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,200);
-cam.position.z=18;
-const N=700,pos=new Float32Array(N*3);for(let i=0;i<N*3;i++)pos[i]=(Math.random()-.5)*70;
-const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xc6ff00,size:.07,transparent:true,opacity:.7}));s.add(pts);
-const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(3.4,.8,180,22,2,3),new THREE.MeshBasicMaterial({color:0xc6ff00,wireframe:true,transparent:true,opacity:.2}));
-knot.position.set(8,1,-6);s.add(knot);
-const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(2.6,1),new THREE.MeshBasicMaterial({color:0xff2e93,wireframe:true,transparent:true,opacity:.22}));
-ico.position.set(-9,-5,-8);s.add(ico);
-const cube=new THREE.Mesh(new THREE.BoxGeometry(2.2,2.2,2.2),new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:.12}));
-cube.position.set(-6,6,-10);s.add(cube);
-const rs=()=>{r.setSize(innerWidth,innerHeight);r.setPixelRatio(Math.min(devicePixelRatio,2));cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()};rs();addEventListener('resize',rs);
-let mx=0,my=0,sy=0;addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener('scroll',()=>sy=scrollY);
-(function a(){knot.rotation.x+=.004;knot.rotation.y+=.006;ico.rotation.x-=.004;ico.rotation.y+=.005;cube.rotation.x+=.006;cube.rotation.z+=.004;pts.rotation.y+=.0006;
-knot.position.y=1+sy*.005;ico.position.y=-5+sy*.004;cube.position.y=6+sy*.003;
-cam.position.x+=(mx*4-cam.position.x)*.05;cam.position.y+=(-my*3-cam.position.y)*.05;cam.lookAt(0,0,0);
-r.render(s,cam);requestAnimationFrame(a)})();
+ const c=document.getElementById('bg'),r=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:true}),s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,200);
+ cam.position.set(0,0,20);
+ const W=110,H=60,g=new THREE.BufferGeometry(),p=new Float32Array(W*H*3);
+ for(let i=0;i<W;i++)for(let j=0;j<H;j++){const k=(i*H+j)*3;p[k]=(i-W/2)*.7;p[k+1]=0;p[k+2]=(j-H/2)*.7}
+ g.setAttribute('position',new THREE.BufferAttribute(p,3));
+ const wave=new THREE.Points(g,new THREE.PointsMaterial({color:0x7c5cff,size:.09,transparent:true,opacity:.55}));
+ wave.position.set(0,-9,-10);wave.rotation.x=.25;s.add(wave);
+ const orb=new THREE.Group();
+ orb.add(new THREE.Mesh(new THREE.IcosahedronGeometry(4.2,2),new THREE.MeshBasicMaterial({color:0xd4ff3a,wireframe:true,transparent:true,opacity:.16})));
+ orb.add(new THREE.Mesh(new THREE.IcosahedronGeometry(2.6,1),new THREE.MeshBasicMaterial({color:0x22d3ee,wireframe:true,transparent:true,opacity:.22})));
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(6.2,.02,8,160),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.18}));ring.rotation.x=1.2;orb.add(ring);
+ orb.position.set(9,2,-4);s.add(orb);
+ const rs=()=>{const m=innerWidth<820;r.setSize(innerWidth,innerHeight);r.setPixelRatio(Math.min(devicePixelRatio,2));cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();orb.position.x=m?3:9;orb.position.y=m?5:2;orb.scale.setScalar(m?.7:1)};
+ rs();addEventListener('resize',rs);
+ let mx=0,my=0,t=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ (function a(){
+  t+=RM?0:.012;const P=g.attributes.position.array;
+  for(let i=0;i<W;i++)for(let j=0;j<H;j++){const k=(i*H+j)*3;P[k+1]=Math.sin(i*.18+t)*1.1+Math.cos(j*.22+t*.8)*1.1}
+  g.attributes.position.needsUpdate=true;
+  const sy=scrollY;
+  orb.rotation.y+=RM?0:.003;orb.rotation.x+=RM?0:.0015;orb.children[1].rotation.y-=RM?0:.008;
+  orb.position.z=-4-sy*.004;
+  cam.position.x+=(mx*3-cam.position.x)*.04;cam.position.y+=(-my*2-cam.position.y)*.04;cam.lookAt(0,0,0);
+  r.render(s,cam);requestAnimationFrame(a)})();
 }catch(e){}
-document.querySelectorAll('[data-tilt]').forEach(el=>{
- el.addEventListener('mousemove',e=>{const b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height;
-  el.style.transform=`rotateY(${(x-.5)*12}deg) rotateX(${(.5-y)*12}deg) translateZ(8px)`});
- el.addEventListener('mouseleave',()=>el.style.transform='');
+
+/* cursor */
+const cur=document.getElementById('cur');let cx=0,cy=0,tx=0,ty=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY});
+(function cl(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(cl)})();
+document.querySelectorAll('[data-h],a,button').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
+
+/* spotlight on boxes */
+document.querySelectorAll('.box').forEach(b=>b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.setProperty('--mx',e.clientX-r.left+'px');b.style.setProperty('--my',e.clientY-r.top+'px')}));
+
+/* tilt on project cards */
+if(!RM&&matchMedia('(hover:hover)').matches)document.querySelectorAll('[data-tilt]').forEach(el=>{
+ el.addEventListener('pointermove',e=>{const b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;el.style.transform=`perspective(1200px) rotateY(${x*6}deg) rotateX(${-y*6}deg)`});
+ el.addEventListener('pointerleave',()=>el.style.transform='');
 });
-const nm=document.getElementById('nm');
-document.addEventListener('mousemove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;nm.style.transform=`rotateY(${x*14}deg) rotateX(${-y*10}deg)`});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
-document.querySelectorAll('.rev').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.1+'s';io.observe(el)});
+
+/* reveal + counters */
+const count=el=>{const n=+el.dataset.c,sf=el.dataset.s||'',d=1400,t0=performance.now();(function f(t){const k=Math.min((t-t0)/d,1),v=Math.round(n*(1-Math.pow(1-k,3)));el.textContent=(n<10?String(v).padStart(2,'0'):v)+sf;if(k<1)requestAnimationFrame(f)})(t0)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');e.target.querySelectorAll('[data-c]').forEach(count);io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rev').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.08+'s';io.observe(el)});
+
+/* active nav link */
+const links=[...document.querySelectorAll('nav .lk a')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('act',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>so.observe(s));
+
+/* Tashkent clock */
+const ck=document.getElementById('clock');const tick=()=>ck.textContent=new Date().toLocaleTimeString('uz-UZ',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Tashkent'});tick();setInterval(tick,10000);
+
+/* form */
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();const b=e.target.querySelector('button');b.innerHTML='Yuborildi ✓';b.style.background='#3dff8a';b.style.borderColor='#3dff8a';e.target.reset()});
 </script>
 </body>
 </html>
