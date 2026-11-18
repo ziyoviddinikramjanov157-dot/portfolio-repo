@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0b0b0c;
+  --color-surface: #141416;
+  --color-raised: #1c1c1f;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-fg: #f3f1ec;
+  --color-muted: #a8a49c;
+  --color-gold: #e0b04b;
+  --color-gold-soft: rgb(224 176 75 / 0.12);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}

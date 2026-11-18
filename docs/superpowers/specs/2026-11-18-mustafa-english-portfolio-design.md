@@ -2,111 +2,73 @@
 
 ## Intent & why
 
-Mustafa Kambarov (`@mustafa__english` on Instagram, 556K followers) is an
-English/IELTS tutor and content creator. His Instagram bio already funnels
-followers to his Telegram channel (`t.me/ieltswithmustaffa`) for lessons.
-He needs a standalone portfolio/marketing website that carries the same
-energy as his content — a credible, modern "cool mentor" presence, not a
-stuffy academic one — and ultimately drives visitors to join his Telegram
-channel / courses.
+Mustafa Kambarov (`@mustafa__english` on Instagram, 556K followers,
+IELTS Speaking 8.0) is an English teacher who sells online Speaking
+courses and runs a "ko‘proq dars qilish" (study-more) marathon split into
+seasons. His Instagram content is about discipline (intizom), and his bio
+sends people to his Telegram channel (`t.me/ieltswithmustaffa`).
 
-This is a second, independent site added to this repo, alongside the
-existing `portfolio-repo/` folder which is the repo owner's (Ziyoviddin's)
-own personal portfolio. The two are unrelated and must not interfere with
-each other.
+The site is being built by one of his students as a draft to show him.
+It goes live under his name only once he agrees.
 
 ## Goals
 
-- A modern, highly energetic, stylish site: dark mode, vibrant neon
-  accents (yellow / electric blue / orange), bold clean typography,
-  minimalistic-but-dynamic layout — Dribbble-grade UI quality.
-- Full written copy across 10 pages, Gen-Z / punchy / slightly humorous /
-  motivating tone — "cool mentor," not "strict professor."
-- Every page ultimately points toward one conversion goal: join the
-  Telegram channel / community.
-- Mobile-first — his actual audience finds him on Instagram/phones.
+- 10 routed pages, all copy in Uzbek (Latin script).
+- Serious, disciplined tone: confident and direct, no jokes or Gen-Z slang.
+  Core message: speaking fluency comes from daily, disciplined practice.
+- Every page leads to one action: enroll via Telegram.
+- Mobile-first; his audience finds him on Instagram.
 
 ## Non-goals
 
-- No backend, payments, auth, or real course-purchase flow. Everything is
-  a static, content-only site; "enroll" / "join" actions link out to
-  Telegram.
-- No CMS — content lives in the React source as data, editable by hand.
-- No attempt to replicate or scrape real photos/videos from his Instagram.
-  We don't have rights to his media, and this session can't fetch
-  Instagram content beyond the one screenshot already shared. Visuals use
-  original illustration/gradient/shape work and placeholder avatar
-  treatment, not downloaded photos.
+- No payments, backend, auth or forms. Enrollment works the way it does
+  today: the student writes on Telegram and pays by card.
+- No CMS; content lives in `src/data/` and the page components.
+- No photos or videos taken from his Instagram; photo slots are
+  placeholders until he provides images.
 
 ## Anti-goals
 
-- Must not read as a generic corporate/template portfolio.
-- Must not read as a strict, textbook-grammar-teacher site.
-- Testimonials ("Wall of Wins") are written copy in the requested voice,
-  not real student quotes. They'll use clearly generic placeholder
-  names/initials (e.g. "— A.K., IELTS 7.5") so nothing is presented as a
-  verified real review. Mustafa swaps in real testimonials later.
-
-## Constraints
-
-- Repo currently has no build tooling at all (the existing site is a
-  single static HTML file). This new project brings its own, self-
-  contained toolchain and must not change anything under the existing
-  `portfolio-repo/` folder.
-- No real course pricing/curriculum details exist yet — copy will be
-  written in the requested voice with illustrative (clearly placeholder)
-  specifics, easy for Mustafa to edit later.
+- Nothing playful or "cool mentor"; this replaces the earlier Gen-Z brief.
+- No invented facts about a real person. Unknown specifics (prices,
+  durations, season dates and counts, student results) appear as `[ ]`
+  placeholders. Testimonials are labelled "Namuna" (sample) until real
+  ones replace them.
 
 ## Approaches considered
 
-1. **Single scrolling page with anchored sections**, plain HTML/CSS/JS
-   (matches the existing site's architecture). Rejected once React was
-   chosen — building 10 content-rich sections as one page would be heavy,
-   and the copy brief is explicitly framed as "10 pages."
-2. **10 real routed pages in Next.js.** Gives SSR/SEO benefits, but adds a
-   server-rendering model, routing conventions, and deploy complexity this
-   static content site doesn't need.
-3. **10 real routed pages, Vite + React + React Router** (chosen). Static
-   output, fast dev loop, trivial to deploy anywhere (Netlify/Vercel/
-   GitHub Pages/etc.), shared `Nav`/`Footer` components avoid the
-   duplication a plain-HTML multi-page site would require.
+1. Single scrolling page in plain HTML (like the repo's existing site).
+   Rejected: the brief is 10 pages, and the user chose React.
+2. Next.js. Rejected: SSR and server routing add nothing to a static
+   content site.
+3. **Vite + React + React Router (chosen).** Static output, shared
+   layout components, deployable to any static host.
 
-Decided with the user: option 3.
+## Decided
 
-## Decided (user-approved)
+- **Stack:** Vite, React, `react-router`, Tailwind CSS v4, `motion` for
+  subtle reveal animations (respects reduced-motion).
+- **Location:** `mustafa-english/` at the repo root, self-contained; the
+  existing `portfolio-repo/` site is untouched.
+- **Pages and routes:**
+  1. `/` — Bosh sahifa
+  2. `/haqimda` — Men haqimda
+  3. `/metodika` — Metodika
+  4. `/kurslar` — Speaking kurslari
+  5. `/ielts` — IELTS
+  6. `/marafon` — Marafon (seasons; replaces the earlier "Speaking Club")
+  7. `/bepul-darslar` — Bepul darslar
+  8. `/natijalar` — Natijalar
+  9. `/savollar` — Savol-javob
+  10. `/aloqa` — Aloqa / Kursga yozilish
+- **Look:** dark background, one restrained gold accent (a serious take on
+  the original "yellow" option), strong sans-serif headings.
+- **Enroll links** all come from one config value, pointing to the
+  Telegram channel until an admin/bot link is provided.
 
-- **Stack:** Vite + React + `react-router-dom`, Tailwind CSS for styling,
-  Framer Motion for motion/transitions.
-- **Location:** new self-contained folder `mustafa-english/` at the repo
-  root (sibling to `portfolio-repo/`), with its own `package.json`.
-- **Structure:** 10 routed pages:
-  1. `/` — Home
-  2. `/about` — About Me
-  3. `/methodology` — The Methodology
-  4. `/courses` — Courses Overview
-  5. `/ielts` — IELTS Zone
-  6. `/speaking-club` — Speaking Club & Community
-  7. `/content-hub` — Free Content Hub
-  8. `/wins` — Wall of Wins (Testimonials)
-  9. `/faq` — FAQ (with attitude)
-  10. `/contact` — Contact / Join
+## Open (decide later)
 
-  Persistent `Nav` (logo/name + links + a standing "Join Telegram" CTA
-  button) and `Footer` (social links: Instagram, Telegram) wrap every
-  route via a shared layout.
-- **Visual language:** dark background, neon yellow / electric blue /
-  orange as accent colors (not all three competing at once per section —
-  one dominant accent + one secondary, picked per the builder's taste),
-  bold large display type for headings, clean sans body type.
-
-## Left to the builder
-
-- Exact color tokens, font choices (Google Fonts, free), and spacing/
-  type scale.
-- All page copy, written in the specified voice, for all 10 pages.
-- Component breakdown, animation details (Framer Motion usage: hover
-  states, page/section transitions, scroll reveals), and responsive
-  behavior.
-- Any illustration/shape/gradient treatment used in place of real photos.
-- Favicon/branding basics (e.g. a simple wordmark/logo treatment for
-  "Mustafa English").
+- Hosting: separate site vs. a sub-path of the existing GitHub Pages
+  site. Routing uses `BrowserRouter`, so the host needs an SPA fallback
+  (or a basename for a sub-path).
+- Marathon details: number of seasons, dates, format and results.
