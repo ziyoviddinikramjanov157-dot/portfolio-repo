@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { byId, CATS, COLLECTIONS, NEW_ARRIVALS, PRODUCTS, type CatId } from '../data/catalog'
 import { useStore } from '../store'
 import { fmt, reducedMotion } from '../lib/util'
-import { Hero3D } from '../components/Hero3D'
 import { Icon, Pic } from '../components/ui'
 
 const LOOKBOOK: [string, string, string][] = [
@@ -89,13 +88,13 @@ export function Landing() {
             <div><b>S–3XL</b><span>o‘lchamlar</span></div>
           </div>
         </div>
-        <Hero3D active={open && mounted}>
+        <div className="lh-media">
           <div className="frame"><img src="img/l-hero.jpg" alt="To‘q ko‘k kostyumdagi erkak pidjak tugmasini qadamoqda" /></div>
           <span className="hchip">Yangi kolleksiya</span>
           <button className="htag" onClick={() => toProduct(suit.id)}>
             <img src={suit.imgs[0]} alt="" /><div><b>{suit.name}</b><small>{fmt(suit.price)}</small></div><Icon n="arrow" />
           </button>
-        </Hero3D>
+        </div>
       </div>
 
       <div className="lmq" aria-hidden="true"><div>

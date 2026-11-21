@@ -2,7 +2,7 @@
 
 Bosmenti do‘konining mobil ilova va veb-sayti (demo). React + TypeScript + Vite asosida qurilgan.
 
-- Birinchi ochilganda 3D landing chiqadi, ro‘yxatdan o‘tish so‘ralmaydi.
+- Birinchi ochilganda do‘kon haqidagi landing sahifasi chiqadi, ro‘yxatdan o‘tish so‘ralmaydi.
 - Kiyimlar 11 ta bo‘limga ajratilgan. Har bir mahsulot sahifasida o‘lcham, rang, ma’lumot va narx bor.
 - Savatda to‘lov usuli tanlanadi: naqd yoki karta.
 - Kirish telefon raqam orqali (SMS kod). Faqat buyurtma berishda so‘raladi.
@@ -37,7 +37,7 @@ src/
   styles.css          barcha uslublar (telefon + kompyuter)
   data/catalog.ts     bo‘limlar, mahsulotlar, o‘lchamlar, o‘lcham jadvallari (demo)
   lib/                yordamchi funksiyalar va fotosiz mahsulotlar uchun chizmalar
-  components/         umumiy qismlar: kartalar, menyu, bildirishnoma, kirish oynasi, 3D hero
+  components/         umumiy qismlar: kartalar, menyu, bildirishnoma, kirish oynasi
   screens/            Landing, Bosh sahifa, Katalog, Mahsulot, Savat, Profil
 public/img/           fotolar (manbalari: public/img/CREDITS.md)
 ```
