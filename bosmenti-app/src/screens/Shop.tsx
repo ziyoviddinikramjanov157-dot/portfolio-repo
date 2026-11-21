@@ -13,7 +13,6 @@ function sorted(list: Product[], sort: Sort) {
   const l = [...list]
   if (sort === 'cheap') l.sort((a, b) => a.price - b.price)
   else if (sort === 'exp') l.sort((a, b) => b.price - a.price)
-  else l.sort((a, b) => b.rev * b.rating - a.rev * a.rating)
   return l
 }
 
@@ -26,7 +25,7 @@ export function Home() {
   return (
     <>
       <header className="top pad">
-        <div><p className="hello">Assalomu alaykum{s.user ? '' : ', mehmon'}</p><h1 className="ttl">Bugun nima kiyamiz?</h1></div>
+        <div><p className="hello">Assalomu alaykum{s.contact.name ? `, ${s.contact.name}` : ''}</p><h1 className="ttl">Bugun nima kiyamiz?</h1></div>
         <button className="ib" onClick={() => go('favs')} aria-label="Sevimlilar"><Icon n="heart" />{s.fav.length > 0 && <i className="bdg">{s.fav.length}</i>}</button>
       </header>
       <div className="pad">
@@ -80,7 +79,7 @@ export function Category() {
   const { s, dispatch } = useStore()
   const all = s.viewCat === 'all'
   const list = sorted(PRODUCTS.filter(p => all || p.cat === s.viewCat), s.sort)
-  const sorts: [Sort, string][] = [['pop', 'Ommabop'], ['cheap', 'Arzonroq'], ['exp', 'Qimmatroq']]
+  const sorts: [Sort, string][] = [['pop', 'Tavsiya'], ['cheap', 'Arzonroq'], ['exp', 'Qimmatroq']]
   return (
     <>
       <header className="bh pad"><BackButton /><div><h1 className="ttl">{all ? 'Barcha kiyimlar' : CN[s.viewCat as CatId]}</h1><small>{list.length} ta mahsulot</small></div></header>

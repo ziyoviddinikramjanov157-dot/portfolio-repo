@@ -1,6 +1,7 @@
 import { artInner, type ArtType } from '../lib/art'
 import { CATS, CN, PRODUCTS, type CatId, type Product } from '../data/catalog'
 import { fmt } from '../lib/util'
+import { asset } from '../lib/api'
 import { useStore } from '../store'
 import type { KeyboardEvent, MouseEvent } from 'react'
 
@@ -18,7 +19,7 @@ export function Art({ t, c, a }: { t: ArtType; c: string; a?: string }) {
 /** Product photo, or the drawing if there is no photo */
 export function Pic({ p, i = 0, lazy = true }: { p: Product; i?: number; lazy?: boolean }) {
   return p.imgs[i]
-    ? <img src={p.imgs[i]} alt={p.name} loading={lazy ? 'lazy' : undefined} />
+    ? <img src={asset(p.imgs[i])} alt={p.name} loading={lazy ? 'lazy' : undefined} />
     : <Art t={p.type} c={p.colors[0].c} a={p.acc} />
 }
 
@@ -26,7 +27,7 @@ export function Pic({ p, i = 0, lazy = true }: { p: Product; i?: number; lazy?: 
 export function CatPic({ id }: { id: CatId }) {
   const p = PRODUCTS.find(x => x.cat === id && x.imgs.length)
   const c = CATS.find(x => x.id === id)!
-  return p ? <img src={p.imgs[0]} alt="" loading="lazy" /> : <Art t={c.type} c={c.c} />
+  return p ? <img src={asset(p.imgs[0])} alt="" loading="lazy" /> : <Art t={c.type} c={c.c} />
 }
 
 export function BackButton({ white }: { white?: boolean }) {

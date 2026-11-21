@@ -17,7 +17,8 @@ export function shade(hex: string, p: number) {
 export const reducedMotion = () =>
   typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
-export const today = () => {
-  const d = new Date()
+/** ISO date -> "21.11.2026" in the viewer's time zone */
+export const fmtDate = (iso: string) => {
+  const d = new Date(iso)
   return [d.getDate(), d.getMonth() + 1, d.getFullYear()].map(x => String(x).padStart(2, '0')).join('.')
 }

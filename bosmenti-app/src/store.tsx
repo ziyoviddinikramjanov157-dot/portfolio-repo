@@ -1,13 +1,40 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useReducer, useRef, useState, type ReactNode, type RefObject } from 'react'
-import { byId, FREE_FROM, SHIP_FEE, type CatId } from './data/catalog'
-import { today } from './lib/util'
+import { byId, SHOP, type CatId } from './data/catalog'
+import { post } from './lib/api'
 
 export type Screen = 'home' | 'catalog' | 'category' | 'favs' | 'product' | 'cart' | 'profile' | 'success'
 export type Sort = 'pop' | 'cheap' | 'exp'
 export interface CartLine { id: string; ci: number; size: string; qty: number }
-export interface Order { no: string; date: string; n: number; total: number; pay: string; ship: string }
-export interface User { phone: string }
+export interface Contact { name: string; phone: string }
+export type OrderStatus = 'new' | 'confirmed' | 'shipping' | 'done' | 'cancelled'
+/** An order as the server returns it to the customer who placed it */
+export interface Order {
+  no: number
+  token: string
+  name: string
+  phone: string
+  ship: 'delivery' | 'pickup'
+  address: string
+  pay: 'cash' | 'card'
+  cardType: string | null
+  itemsTotal: number
+  shipFee: number
+  total: number
+  status: OrderStatus
+  createdAt: string
+  items: { productId: string; name: string; color: string; size: string; price: number; qty: number; image: string | null }[]
+}
+/** The browser remembers only which orders it placed; their details and status come from the server. */
+export interface MyOrder { no: number; token: string }
 interface Frame { screen: Screen; pid: string | null; viewCat: CatId | 'all'; y: number }
+
+export const STATUS_LABEL: Record<OrderStatus, string> = {
+  new: 'Qabul qilindi',
+  confirmed: 'Tasdiqlandi',
+  shipping: 'Yo‘lda',
+  done: 'Topshirildi',
+  cancelled: 'Bekor qilindi',
+}
 
 export interface State {
   landing: boolean
@@ -20,8 +47,8 @@ export interface State {
   pid: string | null
   cart: CartLine[]
   fav: string[]
-  user: User | null
-  orders: Order[]
+  contact: Contact
+  mine: MyOrder[]
   ship: 'delivery' | 'pickup'
   pay: 'cash' | 'card'
   ctype: string
@@ -39,16 +66,14 @@ type Action =
   | { type: 'cq'; i: number; d: number }
   | { type: 'rm'; i: number }
   | { type: 'order'; order: Order }
-  | { type: 'login'; user: User }
-  | { type: 'logout' }
 
-const KEY = 'bosmenti_react_v1'
-const PERSIST = ['cart', 'fav', 'user', 'orders'] as const
+const KEY = 'bosmenti_v2'
+const PERSIST = ['cart', 'fav', 'contact', 'mine', 'addr'] as const
 
 function initial(): State {
   const s: State = {
     landing: true, screen: 'home', stack: [], cat: 'all', q: '', viewCat: 'all', sort: 'pop', pid: null,
-    cart: [], fav: [], user: null, orders: [], ship: 'delivery', pay: 'cash', ctype: 'Uzcard', addr: '', last: null,
+    cart: [], fav: [], contact: { name: '', phone: '' }, mine: [], ship: 'delivery', pay: 'cash', ctype: 'Uzcard', addr: '', last: null,
   }
   try {
     const d = JSON.parse(localStorage.getItem(KEY) || 'null')
@@ -87,19 +112,19 @@ function reducer(s: State, a: Action): State {
     case 'rm':
       return { ...s, cart: s.cart.filter((_, j) => j !== a.i) }
     case 'order':
-      return { ...s, orders: [a.order, ...s.orders], last: a.order, cart: [], stack: [], screen: 'success' }
-    case 'login':
-      return { ...s, user: a.user }
-    case 'logout':
-      return { ...s, user: null }
+      return {
+        ...s,
+        mine: [{ no: a.order.no, token: a.order.token }, ...s.mine].slice(0, 50),
+        last: a.order, cart: [], stack: [], screen: 'success',
+      }
   }
 }
 
 export const cartCount = (s: State) => s.cart.reduce((a, l) => a + l.qty, 0)
 export const subTotal = (s: State) => s.cart.reduce((a, l) => a + (byId(l.id)?.price ?? 0) * l.qty, 0)
-export const shipFee = (s: State) => (s.ship === 'pickup' ? 0 : subTotal(s) >= FREE_FROM ? 0 : SHIP_FEE)
+export const shipFee = (s: State) => (s.ship === 'pickup' ? 0 : subTotal(s) >= SHOP.freeFrom ? 0 : SHOP.shipFee)
 
-export type SheetKind = { kind: 'login'; after?: 'checkout' } | { kind: 'guide' }
+export type SheetKind = { kind: 'guide' }
 interface ToastData { msg: string; btn?: string; act?: () => void; n: number }
 
 interface Ctx {
@@ -109,7 +134,8 @@ interface Ctx {
   back: () => void
   tab: (screen: Screen) => void
   openProduct: (id: string) => void
-  placeOrder: () => void
+  /** Sends the cart to the server. Throws ApiError with a message for the customer if it fails. */
+  placeOrder: () => Promise<void>
   toast: (msg: string, btn?: string, act?: () => void) => void
   toastData: ToastData | null
   sheet: SheetKind | null
@@ -130,8 +156,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   stateRef.current = s
 
   useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify({ cart: s.cart, fav: s.fav, user: s.user, orders: s.orders })) } catch { /* ignore */ }
-  }, [s.cart, s.fav, s.user, s.orders])
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ cart: s.cart, fav: s.fav, contact: s.contact, mine: s.mine, addr: s.addr }))
+    } catch { /* ignore */ }
+  }, [s.cart, s.fav, s.contact, s.mine, s.addr])
 
   // restore (back) or reset (new screen) the scroll position after the screen has rendered
   useLayoutEffect(() => {
@@ -159,16 +187,17 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const toast = useCallback((msg: string, btn?: string, act?: () => void) => setToast({ msg, btn, act, n: Date.now() }), [])
 
-  const placeOrder = useCallback(() => {
+  const placeOrder = useCallback(async () => {
     const st = stateRef.current
-    const order: Order = {
-      no: String(10000 + Math.floor(Math.random() * 90000)),
-      date: today(),
-      n: cartCount(st),
-      total: subTotal(st) + shipFee(st),
-      pay: st.pay === 'cash' ? 'Naqd pul' : `Karta (${st.ctype})`,
-      ship: st.ship === 'pickup' ? 'Do‘kondan olish' : 'Yetkazib berish',
-    }
+    const order = await post<Order>('/api/orders', {
+      name: st.contact.name,
+      phone: st.contact.phone,
+      ship: st.ship,
+      address: st.ship === 'delivery' ? st.addr : '',
+      pay: st.pay,
+      cardType: st.pay === 'card' ? st.ctype : undefined,
+      items: st.cart.map(l => ({ id: l.id, ci: l.ci, size: l.size, qty: l.qty })),
+    })
     scrollTo.current = 0
     dispatch({ type: 'order', order })
   }, [])

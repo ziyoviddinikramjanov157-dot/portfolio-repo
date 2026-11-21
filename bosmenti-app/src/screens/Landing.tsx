@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { byId, CATS, COLLECTIONS, NEW_ARRIVALS, PRODUCTS, type CatId } from '../data/catalog'
+import { byId, CATS, COLLECTIONS, NEW_ARRIVALS, PRODUCTS, SHOP, type CatId } from '../data/catalog'
+import { asset } from '../lib/api'
 import { useStore } from '../store'
 import { fmt, reducedMotion } from '../lib/util'
 import { Icon, Pic } from '../components/ui'
@@ -13,12 +14,12 @@ const LOOKBOOK: [string, string, string][] = [
   ['lb-green', 'Yashil kostyum', 'Bayram uchun'],
 ]
 
-const FAQ: [string, string][] = [
-  ['Yetkazib berish qancha turadi?', 'Toshkent bo‘ylab 25 000 so‘m. 500 000 so‘mdan ortiq buyurtma bepul yetkaziladi. Do‘kondan o‘zingiz olib ketsangiz ham bepul.'],
+const faq = (): [string, string][] => [
+  ['Yetkazib berish qancha turadi?', `Toshkent bo‘ylab ${SHOP.shipFee ? fmt(SHOP.shipFee) : 'bepul'}. ${fmt(SHOP.freeFrom)}dan ortiq buyurtma bepul yetkaziladi. Do‘kondan o‘zingiz olib ketsangiz ham bepul.`],
   ['Qanday to‘lasam bo‘ladi?', 'Kiyimni qabul qilganda naqd pul bilan yoki Uzcard, Humo, Visa kartasi orqali.'],
   ['O‘lcham to‘g‘ri kelmasa-chi?', '14 kun ichida yorlig‘i olinmagan kiyimni boshqa o‘lchamga almashtiramiz.'],
   ['O‘lchamimni qanday bilaman?', 'Har bir kiyim sahifasida "O‘lcham jadvali" bor: ko‘krak, bel va son o‘lchamlari santimetrda. Do‘ppi uchun bosh aylanasi, poyabzal uchun oyoq uzunligi berilgan.'],
-  ['Ro‘yxatdan o‘tishim kerakmi?', 'Yo‘q. Kiyimlarni bemalol ko‘rasiz. Buyurtma berayotganda faqat telefon raqamingiz SMS kod bilan tasdiqlanadi.'],
+  ['Ro‘yxatdan o‘tishim kerakmi?', 'Yo‘q. Kiyimlarni bemalol ko‘rasiz. Buyurtma berayotganda faqat ismingiz va telefon raqamingizni qoldirasiz, operator qo‘ng‘iroq qilib buyurtmani tasdiqlaydi.'],
 ]
 
 /** First-launch page about the shop. No sign-up: "Do‘konga kirish" goes straight to the shop. */
@@ -53,7 +54,7 @@ export function Landing() {
     const el = document.getElementById(id)
     if (el && ref.current) ref.current.scrollTo({ top: el.offsetTop - 70, behavior: smooth })
   }
-  const suit = byId('suit1')!
+  const featured = byId('suit1') ?? PRODUCTS.find(p => p.imgs.length)
 
   const EnterBtn = ({ label = 'Do‘konga kirish' }: { label?: string }) => (
     <button className="cta brass" onClick={() => enter()}>{label} <Icon n="arrow" /></button>
@@ -91,9 +92,11 @@ export function Landing() {
         <div className="lh-media">
           <div className="frame"><img src="img/l-hero.jpg" alt="To‘q ko‘k kostyumdagi erkak pidjak tugmasini qadamoqda" /></div>
           <span className="hchip">Yangi kolleksiya</span>
-          <button className="htag" onClick={() => toProduct(suit.id)}>
-            <img src={suit.imgs[0]} alt="" /><div><b>{suit.name}</b><small>{fmt(suit.price)}</small></div><Icon n="arrow" />
-          </button>
+          {featured && (
+            <button className="htag" onClick={() => toProduct(featured.id)}>
+              {featured.imgs[0] && <img src={asset(featured.imgs[0])} alt="" />}<div><b>{featured.name}</b><small>{fmt(featured.price)}</small></div><Icon n="arrow" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -110,7 +113,7 @@ export function Landing() {
             <p className="lead">Ilovada kiyimni tanlaysiz, o‘lchamini belgilaysiz va naqd yoki karta bilan buyurtma berasiz. Ro‘yxatdan o‘tish shart emas.</p>
             <div className="lstats">
               <div><b>{CATS.length}</b><span>alohida bo‘lim</span></div>
-              <div><b>{PRODUCTS.length}</b><span>demo model</span></div>
+              <div><b>{PRODUCTS.length}</b><span>model</span></div>
               <div><b>14 kun</b><span>almashtirish</span></div>
             </div>
           </div>
@@ -151,7 +154,7 @@ export function Landing() {
       <section className="lw lsec">
         <div className="lhead2"><div><span className="lsmall">Nega Bosmenti</span><h2>Xarid qilish oson</h2></div></div>
         <ul className="feat">
-          <li><Icon n="truck" /><div><b>Yetkazib berish</b><span>Toshkent bo‘ylab. 500 000 so‘mdan ortiq buyurtmaga bepul.</span></div></li>
+          <li><Icon n="truck" /><div><b>Yetkazib berish</b><span>Toshkent bo‘ylab. {fmt(SHOP.freeFrom)}dan ortiq buyurtmaga bepul.</span></div></li>
           <li><Icon n="card" /><div><b>Naqd yoki karta</b><span>Uzcard, Humo, Visa yoki qabul qilganda naqd pul.</span></div></li>
           <li><Icon n="swap" /><div><b>O‘lcham mos kelmasa</b><span>14 kun ichida boshqa o‘lchamga almashtiramiz.</span></div></li>
           <li><Icon n="phone" /><div><b>Ro‘yxatdan o‘tishsiz</b><span>Bemalol tomosha qiling. Telefon raqam faqat buyurtmada so‘raladi.</span></div></li>
@@ -164,7 +167,7 @@ export function Landing() {
           <li><b>Kiyimni tanlang</b><span>Bo‘limlardan yoki qidiruv orqali.</span></li>
           <li><b>O‘lchamni belgilang</b><span>O‘lcham jadvali har bir kiyim sahifasida bor.</span></li>
           <li><b>Savatga qo‘shing</b><span>Yetkazib berish yoki do‘kondan olib ketishni tanlang.</span></li>
-          <li><b>Telefon bilan tasdiqlang</b><span>SMS kod keladi, operator qo‘ng‘iroq qilib buyurtmani tasdiqlaydi.</span></li>
+          <li><b>Buyurtma bering</b><span>Ism va telefon raqamingizni qoldirasiz, operator qo‘ng‘iroq qilib buyurtmani tasdiqlaydi.</span></li>
         </ol>
       </section>
 
@@ -181,15 +184,15 @@ export function Landing() {
         <div className="lfaq">
           <div className="faq">
             <span className="lsmall">Savollar</span><h2 style={{ marginBottom: 22 }}>Ko‘p so‘raladi</h2>
-            {FAQ.map(([q, a], i) => (
+            {faq().map(([q, a], i) => (
               <details key={q} open={i === 0}><summary>{q}<Icon n="plus" /></summary><p>{a}</p></details>
             ))}
           </div>
           <div className="lcontact">
             <span className="lsmall" style={{ margin: 0 }}>Do‘kon</span>
-            <div><Icon n="pin" /><span><b>Toshkent sh.</b><small>Manzil keyin kiritiladi</small></span></div>
-            <div><Icon n="clock" /><span><b>Har kuni 09:00–21:00</b><small>Dam olish kunlarisiz</small></span></div>
-            <div><Icon n="phone" /><span><b>+998 00 000 00 00</b><small>Demo raqam</small></span></div>
+            <div><Icon n="pin" /><span><b>Toshkent sh.</b>{SHOP.address && <small>{SHOP.address}</small>}</span></div>
+            {SHOP.hours && <div><Icon n="clock" /><span><b>{SHOP.hours}</b></span></div>}
+            {SHOP.phone && <div><Icon n="phone" /><span><b><a href={`tel:${SHOP.phone.replace(/[^\d+]/g, '')}`}>{SHOP.phone}</a></b><small>Savollar va buyurtmalar uchun</small></span></div>}
             <EnterBtn />
           </div>
         </div>
@@ -200,7 +203,7 @@ export function Landing() {
           <img src="img/c-classic.jpg" alt="" loading="lazy" />
           <div className="lf"><span className="lsmall">Bosmenti</span><h2>Yangi uslubingiz shu yerdan boshlanadi</h2><EnterBtn /></div>
         </div>
-        <footer className="lfoot"><span>© 2026 Bosmenti · Erkaklar kiyim do‘koni</span><span>Fotolar: Unsplash (demo)</span></footer>
+        <footer className="lfoot"><span>© {new Date().getFullYear()} Bosmenti · Erkaklar kiyim do‘koni</span></footer>
       </div>
 
       <div className="lcta">

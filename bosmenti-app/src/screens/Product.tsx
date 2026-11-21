@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import { byId, CN, FREE_FROM, SHIP_FEE, SIZES } from '../data/catalog'
+import { byId, CN, SHOP, SIZES } from '../data/catalog'
 import { useStore } from '../store'
 import { fmt, reducedMotion } from '../lib/util'
+import { asset } from '../lib/api'
 import { Art, BackButton, FavButton, Icon } from '../components/ui'
 
 export function Product() {
@@ -38,7 +39,7 @@ export function Product() {
   const tabs = [
     <p key="d">{p.desc}</p>,
     <dl key="m" className="spec"><dt>Material</dt><dd>{p.mat}</dd><dt>Ishlab chiqarilgan</dt><dd>{p.made}</dd><dt>Ranglar</dt><dd>{p.colors.map(c => c.n).join(', ')}</dd><dt>Parvarish</dt><dd>{care}</dd></dl>,
-    <dl key="s" className="spec"><dt>Toshkent</dt><dd>1–2 kun, {fmt(SHIP_FEE)}</dd><dt>Bepul</dt><dd>{fmt(FREE_FROM)} dan ortiq buyurtmaga</dd><dt>Olib ketish</dt><dd>Do‘kondan bepul</dd><dt>Almashtirish</dt><dd>14 kun ichida, yorlig‘i bilan</dd></dl>,
+    <dl key="s" className="spec"><dt>Toshkent</dt><dd>1–2 kun, {SHOP.shipFee ? fmt(SHOP.shipFee) : 'bepul'}</dd><dt>Bepul</dt><dd>{fmt(SHOP.freeFrom)} dan ortiq buyurtmaga</dd><dt>Olib ketish</dt><dd>Do‘kondan bepul</dd><dt>Almashtirish</dt><dd>14 kun ichida, yorlig‘i bilan</dd></dl>,
   ]
 
   return (
@@ -48,14 +49,14 @@ export function Product() {
         {photo ? (
           <>
             <div className="gal" id="gal" ref={galRef} onScroll={e => setImg(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}>
-              {p.imgs.map((src, i) => <img key={src} src={src} alt={p.name + (i ? ' (2-rasm)' : '')} />)}
+              {p.imgs.map((src, i) => <img key={src} src={asset(src)} alt={p.name + (i ? ` (${i + 1}-rasm)` : '')} />)}
             </div>
             {p.imgs.length > 1 && (
               <div className="gdots">
                 {p.imgs.map((src, i) => (
                   <button key={src} className={i === img ? 'on' : ''} aria-label={`${i + 1}-rasm`}
                     onClick={() => galRef.current?.scrollTo({ left: galRef.current.clientWidth * i, behavior: smooth })}>
-                    <img src={src} alt="" />
+                    <img src={asset(src)} alt="" />
                   </button>
                 ))}
               </div>
@@ -69,7 +70,6 @@ export function Product() {
       <div className="pd">
         <span className="pcat">{CN[p.cat]} · {p.made}</span>
         <h1>{p.name}</h1>
-        <div className="rate"><Icon n="star" /><b>{p.rating.toFixed(1)}</b><span>· {p.rev} ta sharh</span></div>
         <div className="price"><b>{fmt(p.price)}</b>{p.old > 0 && <><s>{fmt(p.old)}</s><em>−{pct}%</em></>}</div>
 
         <div className="row"><h4>Rang: <span>{col.n}</span></h4></div>

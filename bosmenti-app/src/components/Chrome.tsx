@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { cartCount, useStore, type Screen } from '../store'
 import { Icon } from './ui'
-import { LoginSheet } from './LoginSheet'
 import { SizeGuide } from './SizeGuide'
 import type { SheetKind } from '../store'
 
@@ -83,10 +82,6 @@ export function SheetHost() {
   const { sheet, closeSheet } = useStore()
   // keep the last sheet's content on screen while it slides away
   const last = useRef<SheetKind | null>(null)
-  const openCount = useRef(0)
-  const prev = useRef<SheetKind | null>(null)
-  if (sheet && sheet !== prev.current) openCount.current++
-  prev.current = sheet
   if (sheet) last.current = sheet
   useEffect(() => {
     const k = (e: KeyboardEvent) => { if (e.key === 'Escape') closeSheet() }
@@ -98,7 +93,6 @@ export function SheetHost() {
     <div className={'ov' + (sheet ? ' open' : '')} onClick={e => { if (e.target === e.currentTarget) closeSheet() }}>
       <div className="sheet" role="dialog" aria-modal="true">
         <div className="grab" />
-        {k?.kind === 'login' && <LoginSheet key={openCount.current} after={k.after} />}
         {k?.kind === 'guide' && <SizeGuide />}
       </div>
     </div>
